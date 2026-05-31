@@ -52,4 +52,6 @@ if st.button("Generate"):
         letter = mapping[key][inputs[f"lp{i}"]]
         html_output += apply_styles(letter, inputs[f"lp{i}"], inputs[f"mp{i}"], inputs[f"mm{i}"], inputs[f"sp{i}"], inputs[f"sm{i}"], str(st.session_state.vals['dof']))
     
-    st.markdown(f"<div style='font-size: 80px; text-align: center;'>{html_output}</div>", unsafe_allow_html=True)
+    # Use clamp to keep text responsive: (Minimum, Preferred, Maximum)
+
+    st.markdown(f"<div style='font-size: clamp(50px, 15vw, 300px); text-align: center; line-height: 1.2;'>{html_output}</div>", unsafe_allow_html=True)
