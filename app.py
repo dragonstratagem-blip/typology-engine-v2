@@ -3,9 +3,9 @@ import random
 
 # --- Calculation Logic ---
 def calculate_index(inputs):
-    # Mapping dropdown options to 0-based indices
-    # lp: 2, mp: 3, mm: 3, sp: 3, sm: 6
-    # Base 324 per column
+    # Calculate index based on 0-based positions in dropdowns
+    # lp (0-1), mp (0-2), mm (0-2), sp (0-2), sm (0-5)
+    # Column value = sm + 6 * (sp + 3 * (mm + 3 * (mp + 3 * lp)))
     col_totals = []
     for i in range(4):
         lp = ["+", "-"].index(inputs[f"lp{i}"])
@@ -14,7 +14,6 @@ def calculate_index(inputs):
         sp = [" ", "+", "-"].index(inputs[f"sp{i}"])
         sm = ["1", "2", "3", "4", "5", "6"].index(inputs[f"sm{i}"])
         
-        # Flatten column into a single integer 0-323
         val = sm + (6 * (sp + (3 * (mm + (3 * (mp + (3 * lp)))))))
         col_totals.append(val)
     
@@ -59,7 +58,7 @@ with st.sidebar:
 current_index = calculate_index(inputs)
 
 # --- Main Page Execution ---
-st.write(f"### {current_index:,} of 55,000,000,000 combinations")
+st.write(f"### {current_index:,} of 10,995,116,277,760 combinations")
 st.title("Typology Codification Engine")
 
 if st.button("Randomize All"):
