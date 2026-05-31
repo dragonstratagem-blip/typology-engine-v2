@@ -56,7 +56,7 @@ with st.sidebar:
         inputs[f"sm{i}"] = st.selectbox(f"{labels[i][:2]} S-Mag", ["1", "2", "3", "4", "5", "6"], index=st.session_state.vals['data'][i][4])
 
 # --- Index Calculation ---
-current_index = calculate_index(inputs)
+current_index = calculate_index(inputs)*5
 
 # --- Main Page Execution ---
 st.write(f"### {current_index:,} of 55,000,000,000 combinations")
