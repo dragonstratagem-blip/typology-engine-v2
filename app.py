@@ -92,3 +92,21 @@ if st.button("Generate"):
         letter = mapping[key][inputs[f"lp{i}"]]
         html_output += apply_styles(letter, inputs[f"lp{i}"], inputs[f"mp{i}"], inputs[f"mm{i}"], inputs[f"sp{i}"], inputs[f"sm{i}"], dof_val)
     st.markdown(f"<div style='font-size: clamp(50px, 15vw, 300px); text-align: center; line-height: 1.2;'>{html_output}</div>", unsafe_allow_html=True)
+    
+    # --- Glossary Section ---
+    st.markdown("---")
+    st.markdown("### Glossary of Typology Premises")
+    st.markdown("""
+    * **PL (Practicality)**: Determines the interaction with the environment.
+        * **+ (E)**: Extraversion
+        * **- (I)**: Introversion
+    * **PN (Protocol)**: Determines the processing of information.
+        * **+ (S)**: Sensing
+        * **- (N)**: Intuition
+    * **PS (Principal)**: Determines the framework for decision making.
+        * **+ (T)**: Thinking
+        * **- (F)**: Feeling
+    * **PR (Purpose)**: Determines the approach to external structure.
+        * **+ (J)**: Judging
+        * **- (P)**: Perceiving
+    """)
