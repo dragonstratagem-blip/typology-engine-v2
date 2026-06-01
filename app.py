@@ -3,8 +3,6 @@ import random
 
 # --- Calculation Logic ---
 def calculate_index(inputs, dof_val):
-    # Mapping dropdown options to 0-based indices
-    # Base 324 per column
     col_totals = []
     for i in range(4):
         lp = ["+", "-"].index(inputs[f"lp{i}"])
@@ -13,14 +11,11 @@ def calculate_index(inputs, dof_val):
         sp = [" ", "+", "-"].index(inputs[f"sp{i}"])
         sm = ["1", "2", "3", "4", "5", "6"].index(inputs[f"sm{i}"])
         
-        # Flatten column into a single integer 0-323
         val = sm + (6 * (sp + (3 * (mm + (3 * (mp + (3 * lp)))))))
         col_totals.append(val)
     
-    # Calculate total index in base-324
     total = col_totals[0] + (324 * col_totals[1]) + (324**2 * col_totals[2]) + (324**3 * col_totals[3])
     
-    # Incorporate the degree of freedom to get the exact index
     return (total * 5) + dof_val
 
 # --- Styling Logic ---
@@ -41,6 +36,16 @@ def apply_styles(letter, pol, mag_pol, mag_val, spol, smag, dof_val):
     style.append(f"color: {colors[smag]};")
     
     return f"<span style='{' '.join(style)}'>{letter}</span>"
+
+# --- Callback Function for Randomization ---
+def randomize_data():
+    st.session_state.dof = str(random.randint(0, 4))
+    for i in range(4):
+        st.session_state[f"lp{i}"] = random.choice(["+", "-"])
+        st.session_state[f"mp{i}"] = random.choice([" ", "+", "-"])
+        st.session_state[f"mm{i}"] = random.choice(["1", "2", "3"])
+        st.session_state[f"sp{i}"] = random.choice([" ", "+", "-"])
+        st.session_state[f"sm{i}"] = random.choice(["1", "2", "3", "4", "5", "6"])
 
 # --- State Management ---
 if 'initialized' not in st.session_state:
@@ -76,15 +81,8 @@ current_index = calculate_index(inputs, int(dof_val))
 st.write(f"### {current_index:,} of 55,099,802,880 combinations")
 st.title("Typology Primer Codification Engine")
 
-if st.button("Randomize All"):
-    st.session_state.dof = str(random.randint(0, 4))
-    for i in range(4):
-        st.session_state[f"lp{i}"] = random.choice(["+", "-"])
-        st.session_state[f"mp{i}"] = random.choice([" ", "+", "-"])
-        st.session_state[f"mm{i}"] = random.choice(["1", "2", "3"])
-        st.session_state[f"sp{i}"] = random.choice([" ", "+", "-"])
-        st.session_state[f"sm{i}"] = random.choice(["1", "2", "3", "4", "5", "6"])
-    st.rerun()
+# Use the on_click parameter to trigger the callback
+st.button("Randomize All", on_click=randomize_data)
 
 if st.button("Generate"):
     mapping = {"PL": {"+":"E", "-":"I"}, "PN": {"+":"S", "-":"N"}, "PS": {"+":"T", "-":"F"}, "PR": {"+":"J", "-":"P"}}
