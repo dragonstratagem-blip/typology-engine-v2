@@ -114,7 +114,7 @@ current_index = calculate_index(inputs)*5
 
 # --- Main Page Execution ---
 
-st.write(f"### {current_index:,} of 55,099,802,880 combinations")
+st.write(f"### {current_index:,} of 55,000,000,000 combinations")
 
 st.title("Typology Codification Engine")
 
