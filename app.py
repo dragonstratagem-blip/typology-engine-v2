@@ -1,6 +1,9 @@
 import streamlit as st
 import random
 
+# --- page configuration to reduce margins ---
+st.set_page_config(layout="wide")
+
 # --- calculation logic ---
 def calculate_index(inputs, dof_val):
     col_totals = []
@@ -63,74 +66,4 @@ with st.sidebar:
     st.markdown("<h2 style='font-size: 150%; font-weight: bold; color: #FFEF00;'>Input Controls</h2>", unsafe_allow_html=True)
     dof_val = st.selectbox("Degree of Freedom (0-4)", ["0", "1", "2", "3", "4"], key='dof')
     
-    labels = ["PL = Practicality", "PN = Protocol", "PS = Principal", "PR = Purpose"]
-    inputs = {}
-    
-    for i in range(4):
-        st.markdown(f"<h3 style='font-size: 150%; font-weight: bold; color: #FFEF00;'>{labels[i]}</h3>", unsafe_allow_html=True)
-        inputs[f"lp{i}"] = st.selectbox(f"{labels[i][:2]} Letter-Polarity (+ or -)", ["+", "-"], key=f"lp{i}")
-        inputs[f"mp{i}"] = st.selectbox(f"{labels[i][:2]} Influence-Polarity (+ or- or nul)", [" ", "+", "-"], key=f"mp{i}")
-        inputs[f"mm{i}"] = st.selectbox(f"{labels[i][:2]} Influence-Magnitude (1-3)", ["1", "2", "3"], key=f"mm{i}")
-        inputs[f"sp{i}"] = st.selectbox(f"{labels[i][:2]} Capacity-Polarity (+ or- or nul)", [" ", "+", "-"], key=f"sp{i}")
-        inputs[f"sm{i}"] = st.selectbox(f"{labels[i][:2]} Capacity-Magnitude (1-6)", ["1", "2", "3", "4", "5", "6"], key=f"sm{i}")
-
-# --- index calculation ---
-current_index = calculate_index(inputs, int(dof_val))
-
-# --- main page execution ---
-st.write(f"### {current_index:,} of 55,099,802,880 combinations")
-st.title("Typology Primer Codification Engine")
-
-# use the on_click parameter to trigger the callback
-st.button("Randomize All", on_click=randomize_data)
-
-if st.button("Generate"):
-    mapping = {"PL": {"+":"E", "-":"I"}, "PN": {"+":"S", "-":"N"}, "PS": {"+":"T", "-":"F"}, "PR": {"+":"J", "-":"P"}}
-    html_output = ""
-    for i, label in enumerate(labels):
-        key = label[:2]
-        letter = mapping[key][inputs[f"lp{i}"]]
-        html_output += apply_styles(letter, inputs[f"lp{i}"], inputs[f"mp{i}"], inputs[f"mm{i}"], inputs[f"sp{i}"], inputs[f"sm{i}"], dof_val)
-    st.markdown(f"<div style='font-size: clamp(50px, 15vw, 300px); text-align: center; line-height: 1.2;'>{html_output}</div>", unsafe_allow_html=True)
-    
-    # --- glossary section ---
-    st.markdown("---")
-    
-    glossary_html = """<div style="font-size: 150%; font-weight: bold; color: #FFEF00;">
-<h3 style="color: #FFEF00;">Glossary of Typology Primers</h3>
-<ul>
-<li><b>PL (Practicality)</b>: Merriam-Webster's Dictionary definition 1: and (Practical) definition 1 a: the quality or state of being of relating to, or manifested in practice or action : not theoretical or ideal.
-<ul>
-<li><b>+PL = (E)</b>: Extraversion: The use of practicality in decision making.</li>
-<li><b>-PL = (I)</b>: Introversion: the lack of practicality and decision making.</li>
-</ul>
-</li>
-<li><b>PN (Protocol)</b>: Merriam-Webster's Dictionary definition 1 a: a system of rules that explain the correct conduct and procedures to be followed in formal situations.
-<ul>
-<li><b>+PN = (S)</b>: Sensing: The use of protocol in decision making.</li>
-<li><b>-PN = (N)</b>: Intuition: the lack of protocol in decision making.</li>
-</ul>
-</li>
-<li><b>PS (Principal)</b>: Merriam-Webster's Dictionary definition 1 a: a comprehensive and fundamental law, doctrine, or assumption.
-<ul>
-<li><b>+PS = (T)</b>: Thinking: The use of principles in decision making.</li>
-<li><b>-PS = (F)</b>: Feeling: the lack of principles in decision making.</li>
-</ul>
-</li>
-<li><b>PR (Purpose)</b>: Merriam-Webster's Dictionary definition 1 c: the aim or goal of a person.
-<ul>
-<li><b>+PR = (J)</b>: Judging: the use of purpose and decision making.</li>
-<li><b>-PR = (P)</b>: Perceiving: The lack of purpose in decision making.</li>
-</ul>
-</li>
-</ul>
-<h3 style="color: #FFEF00;">Additional Definitions</h3>
-<ul>
-<li><b>Letter-Polarity</b>: Is either + or - before the letter code for the primer of the personality Trait Duality. The letters of the Myers-Briggs personality types, such as E, I, S, N, T, F, J, and P, are determined by the polarity applied to 1 of 4 primer codes.</li>
-<li><b>Influence-Polarity</b>: Is either +, -, or null, placed before the Influence-Magnitude number, where influence is the effect the primer has on the person's personality. The visual representation is an underline for plus (+), a strikethrough for minus (-), and plain text for null.</li>
-<li><b>Influence-Magnitude</b>: Is a range of 1 to 3 indicating how much the primer influences the person's personality. The visual representation is italic for an influence of 1, standard text for an influence of 2, and bold for an influence of 3.</li>
-<li><b>Capacity-Polarity</b>: Is either +, -, or null before the Capacity-Magnitude number, where capacity is the effect that the person's personality has on the primer. The visual representation is superscript for plus (+), subscript for minus (-), and standard alignment for null.</li>
-<li><b>Capacity-Magnitude</b>: Is a range of 1 to 6 indicating how much the person's personality affects the primer. The visual representation is red text for a capacity of 1, orange text for 2, yellow text for 3, green text for 4, blue text for 5, and purple text for 6.</li>
-</ul>
-</div>"""
-    st.markdown(glossary_html, unsafe_allow_html=True)
+    labels = ["PL = Practicality", "PN = Protocol", "PS = Principal",
