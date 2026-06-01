@@ -97,4 +97,23 @@ if st.button("Generate"):
     st.markdown("---")
     st.markdown("### Glossary of Typology Primers")
     st.markdown("""
-    * **PL (Practicality)**: Merriam-Webster's Dictionary definition 1: and (Practical) definition 1 a: the quality or state of being of
+    * **PL (Practicality)**: Merriam-Webster's Dictionary definition 1: and (Practical) definition 1 a: the quality or state of being of relating to, or manifested in practice or action : not theoretical or ideal.
+        * **+PL = (E)**: Extraversion: The use of practicality in decision making.
+        * **-PL = (I)**: Introversion: the lack of practicality and decision making.
+    * **PN (Protocol)**: Merriam-Webster's Dictionary definition 1 a: a system of rules that explain the correct conduct and procedures to be followed in formal situations.
+        * **+PN = (S)**: Sensing: The use of protocol in decision making.
+        * **-PN = (N)**: Intuition: the lack of protocol in decision making.
+    * **PS (Principal)**: Merriam-Webster's Dictionary definition 1 a: a comprehensive and fundamental law, doctrine, or assumption.
+        * **+PS = (T)**: Thinking: The use of principles in decision making.
+        * **-PS = (F)**: Feeling: the lack of principles in decision making.
+    * **PR (Purpose)**: Merriam-Webster's Dictionary definition 1 c: the aim or goal of a person.
+        * **+PR = (J)**: Judging: the use of purpose and decision making.
+        * **-PR = (P)**: Perceiving: The lack of purpose in decision making.
+        
+    ### Additional Definitions
+    * **Letter-Polarity**: Is either + or - before the letter code for the primer of the personality Trait Duality. The letters of the Myers-Briggs personality types, such as E, I, S, N, T, F, J, and P, are determined by the polarity applied to 1 of 4 primer codes.
+    * **Influence-Polarity**: Is either +, -, or null, placed before the Influence-Magnitude number, where influence is the effect the primer has on the person's personality. The visual representation is an underline for plus (+), a strikethrough for minus (-), and plain text for null.
+    * **Influence-Magnitude**: Is a range of 1 to 3 indicating how much the primer influences the person's personality. The visual representation is italic for an influence of 1, standard text for an influence of 2, and bold for an influence of 3.
+    * **Capacity-Polarity**: Is either +, -, or null before the Capacity-Magnitude number, where capacity is the effect that the person's personality has on the primer. The visual representation is superscript for plus (+), subscript for minus (-), and standard alignment for null.
+    * **Capacity-Magnitude**: Is a range of 1 to 6 indicating how much the person's personality affects the primer. The visual representation is red text for a capacity of 1, orange text for 2, yellow text for 3, green text for 4, blue text for 5, and purple text for 6.
+    """)
